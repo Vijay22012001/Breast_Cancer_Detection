@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>3 Sets — 10 Columns (5 per row)</title>
+  <style>
+    :root{
+      --gap: 12px;
+      --card-bg: #f7f9fc;
+      --card-border: #dbe6f0;
+      --accent: #2b7cff;
+      --text: #1f2937;
+      --radius: 8px;
+    }
+
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 24px;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .container{
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .set {
+      border: 1px solid var(--card-border);
+      background: linear-gradient(180deg, #fff, var(--card-bg));
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(20,30,60,0.04);
+    }
+
+    .set-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 12px;
+    }
+
+    .set-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* 5 side-by-side */
+      gap: var(--gap);
+    }
+
+    /* column card */
+    .col {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 14px 10px;
+      border: 1px solid var(--card-border);
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(20,30,60,0.03);
+    }
+
+    .col-number {
+      font-size: 1.15rem;
+      color: var(--text);
+      display:block;
+    }
+
+    .col-label {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #49607a;
+      font-weight: 500;
+    }
+
+    /* spacing between the two rows of 5 */
+    .spacer {
+      height: 12px;
+    }
+
+    /* responsive: collapse to 2 columns on small screens */
+    @media (max-width: 680px){
+      .grid-5{
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Breast Cancer Detection</h1>
+
+    <form action="{{url_for('predict_datapoint')}}" method="POST">
+            <!-- Set 1 -->
+            <div class="set">
+            <h2>MEAN</h2>
+            <div style="display:flex; gap:40px;">
+
+                <!-- First vertical block (5 rows) -->
+                <div>
+                <div><label>Radius      :</label> <input type="float" name="radius_mean" required="required"></div><br>
+                <div><label>texture     :</label> <input type="float" name="texture_mean" required="required"></div><br>
+                <div><label>Perimeter   :</label> <input type="float" name="perimeter_mean" required="required"></div><br>
+                <div><label>Area        :</label> <input type="float" name="area_mean" required="required"></div><br>
+                <div><label>Smoothness  :</label> <input type="float" name="smoothness_mean" required="required"></div>
+                </div>
+
+                <!-- Second vertical block (5 rows) -->
+                <div>
+                <div><label>Compactness      :</label> <input type="float" name="compactness_mean" required="required"></div><br>
+                <div><label>Concavity        :</label> <input type="float" name="concavity_mean" required="required"></div><br>
+                <div><label>Concave Points   :</label> <input type="float" name="concave_points_mean" required="required"></div><br>
+                <div><label>Symmetry         :</label> <input type="float" name="symmetry_mean" required="required"></div><br>
+                <div><label>Fractal Dimension:</label> <input type="float" name="fractal_dimension_mean" required="required"></div>
+                </div>
+
+            </div>
+            </div>
+
+
+
+            <div class="set">
+            <h2>STANDARD ERROR</h2>
+            <div style="display:flex; gap:40px;">
+
+                <div>
+                <div><label>Radius      :</label> <input type="float" name="radius_se" required="required"></div><br>
+                <div><label>texture     :</label> <input type="float" name="texture_se" required="required"></div><br>
+                <div><label>Perimeter   :</label> <input type="float" name="perimeter_se" required="required"></div><br>
+                <div><label>Area        :</label> <input type="float" name="area_se" required="required"></div><br>
+                <div><label>Smoothness  :</label> <input type="float" name="smoothness_se" required="required"></div>
+                </div>
+
+                <!-- Second vertical block (5 rows) -->
+                <div>
+                <div><label>Compactness      :</label> <input type="float" name="compactness_se" required="required"></div><br>
+                <div><label>Concavity        :</label> <input type="float" name="concavity_se" required="required"></div><br>
+                <div><label>Concave Points   :</label> <input type="float" name="concave_points_se" required="required"></div><br>
+                <div><label>Symmetry         :</label> <input type="float" name="symmetry_se" required="required"></div><br>
+                <div><label>Fractal Dimension:</label> <input type="float" name="fractal_dimension_se" required="required" ></div>
+                </div>
+
+            </div>
+            </div>
+
+
+
+
+            <div class="set">
+            <h2>WORST</h2>
+            <div style="display:flex; gap:40px;">
+
+                <!-- First vertical block (5 rows) -->
+                <div>
+                <div><label>Radius      :</label> <input type="float" name="radius_worst" required="required"></div><br>
+                <div><label>texture     :</label> <input type="float" name="texture_worst" required="required"></div><br>
+                <div><label>Perimeter   :</label> <input type="float" name="perimeter_worst" required="required"></div><br>
+                <div><label>Area        :</label> <input type="float" name="area_worst" required="required"></div><br>
+                <div><label>Smoothness  :</label> <input type="float" name="smoothness_worst" required="required"></div>
+                </div>
+
+                <!-- Second vertical block (5 rows) -->
+                <div>
+                <div><label>Compactness      :</label> <input type="float" name="compactness_worst" required="required"></div><br>
+                <div><label>Concavity        :</label> <input type="float" name="concavity_worst" required="required"></div><br>
+                <div><label>Concave Points   :</label> <input type="float" name="concave_points_worst" required="required"></div><br>
+                <div><label>Symmetry         :</label> <input type="float" name="symmetry_worst" required="required"></div><br>
+                <div><label>Fractal Dimension:</label> <input type="float" name="fractal_dimension_worst" required="required"></div>
+                </div>
+
+            </div>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+
+        <!-- <h2>
+            The Final Prediction is {{results}}
+        </h2> -->
+    </div>
+</body>
+</html>

@@ -1,2 +1,83 @@
-<h2>Prediction Result:</h2>
-<p>{{ results }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prediction Result</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      max-width: 500px;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .card h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .result {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0078d7;
+      margin: 20px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #0078d7;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #005fa3;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔮 Prediction Result</h1>
+    <p class="result">
+      {% if results == 1 %}
+        ✅ The model predicts **Malignant** (Cancer Positive)
+      {% elif results == 0 %}
+        ✅ The model predicts **Benign** (No Cancer)
+      {% else %}
+        No prediction available
+      {% endif %}
+    </p>
+    <a href="{{ url_for('index') }}" class="btn">🔙 Go Back</a>
+  </div>
+</body>
+</html>
